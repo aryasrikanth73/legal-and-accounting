@@ -64,7 +64,7 @@
         }
 
         section {
-            padding: 120px 0; /* Enterprise Spacing */
+            padding: 50px 0; /* Enterprise Spacing */
         }
         
         @media (max-width: 991px) {
@@ -281,11 +281,63 @@
             font-weight: 600;
         }
 
-        .trust-section {
-            padding: 60px 0;
-            border-bottom: 1px solid rgba(10, 37, 64, 0.05);
-            background: var(--white);
-        }
+.trust-section{
+    background:#fff;
+    overflow:hidden;
+}
+
+.logo-slider{
+    position:relative;
+    overflow:hidden;
+    width:100%;
+}
+
+.logo-track{
+    display:flex;
+    align-items:center;
+    width:max-content;
+    animation:scrollLogos 25s linear infinite;
+}
+
+.logo-track:hover{
+    animation-play-state:paused;
+}
+
+.logo-item{
+    min-width:220px;
+    height:90px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:0 15px;
+
+    background:#fff;
+    border:1px solid rgba(0,0,0,.08);
+    border-radius:16px;
+
+    font-size:32px;
+    font-weight:700;
+    color:#9ca3af;
+
+    transition:.3s;
+}
+
+.logo-item:hover{
+    color:#06122A;
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+@keyframes scrollLogos{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
         
         .client-logo {
             opacity: 0.4;
@@ -689,26 +741,6 @@
         </div>
     </section>
 
-    <!-- ================= SECTION 3: TRUST & CREDIBILITY ================= -->
-    <section class="trust-section">
-        <div class="container">
-            <div class="row align-items-center text-center text-lg-start">
-                <div class="col-lg-3 mb-4 mb-lg-0 reveal">
-                    <p class="mb-0 fw-bold text-dark text-uppercase letter-spacing-1">Trusted By Businesses Across India</p>
-                </div>
-                <div class="col-lg-9 reveal delay-100">
-                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-between align-items-center gap-4 gap-lg-5">
-                        <div class="client-logo"><i class="fa-brands fa-stripe fa-3x"></i></div>
-                        <div class="client-logo"><i class="fa-brands fa-aws fa-3x"></i></div>
-                        <div class="client-logo"><i class="fa-brands fa-microsoft fa-3x"></i></div>
-                        <div class="client-logo"><i class="fa-brands fa-google fa-3x"></i></div>
-                        <div class="client-logo" style="font-family: serif; font-size: 1.8rem; font-weight: bold;">Vanguard</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ================= SECTION 4: LEGAL SERVICES ================= -->
     <section id="legal-services" class="bg-light-custom">
         <div class="container">
@@ -977,6 +1009,40 @@
             </div>
         </div>
     </section>
+
+
+    <!-- ================= SECTION 3: TRUST & CREDIBILITY ================= -->
+<section class="trust-section">
+    <div class="container">
+        
+        <div class="text-center mb-5">
+            <span class="section-subtitle">Trusted Partners</span>
+            <h2 class="mb-3">Trusted by Businesses Across India</h2>
+            <p class="text-muted mb-0">
+                Supporting startups, SMEs and enterprises with legal and accounting excellence.
+            </p>
+        </div>
+
+        <div class="logo-slider">
+            <div class="logo-track">
+
+                <div class="logo-item">Stripe</div>
+                <div class="logo-item">AWS</div>
+                <div class="logo-item">Microsoft</div>
+                <div class="logo-item">Google</div>
+                <div class="logo-item">Vanguard</div>
+
+                <div class="logo-item">Stripe</div>
+                <div class="logo-item">AWS</div>
+                <div class="logo-item">Microsoft</div>
+                <div class="logo-item">Google</div>
+                <div class="logo-item">Vanguard</div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
 
     <!-- ================= SECTION 8: TESTIMONIALS ================= -->
     <section id="testimonials" class="bg-light-custom">
