@@ -203,33 +203,6 @@
             margin-inline: auto;
         }
 
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 20px 30px;
-            padding-left: 55px;
-            border-radius: 8px;
-            border: none;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            outline: none;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 1.2rem;
-        }
-
         /* Trust Badges */
         .trust-badges .badge {
             background-color: transparent;
@@ -316,13 +289,6 @@
             line-height: 1.4;
         }
 
-        .empty-state {
-            display: none;
-            text-align: center;
-            padding: 50px 0;
-            color: #64748b;
-        }
-
         /* --- Modal Styles --- */
         .modal-content {
             border-radius: var(--radius);
@@ -401,7 +367,7 @@
                 </ul>
                 <div class="nav-buttons d-flex gap-2 mt-3 mt-lg-0">
                     <button class="btn btn-outline-primary-custom px-4">Login</button>
-                    <button class="btn btn-accent px-4" data-bs-toggle="modal" data-bs-target="#consultationModal" data-service-name="General Consultation">Get Started</button>
+                    <button class="btn btn-accent px-4" data-bs-toggle="modal" data-bs-target="#consultationModal" data-service-name="General Consultation" data-category-name="General Inquiry" data-menu-name="Website Inquiry">Get Started</button>
                 </div>
             </div>
         </div>
@@ -412,11 +378,6 @@
         <div class="container">
             <h1>Legal, Startup & <span>Taxation</span> Services</h1>
             <p>Professional compliance and registration services for businesses and individuals.</p>
-            
-            <div class="search-box">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search for a service (e.g., NDA, GST, Registration)...">
-            </div>
 
             <div class="trust-badges mt-4 d-flex justify-content-center gap-3 flex-wrap">
                 <span class="badge rounded-pill border border-light text-light fw-normal"><i class="fa-solid fa-bolt me-1"></i> Fast Processing</span>
@@ -428,11 +389,6 @@
 
     <!-- Main Content Grid -->
     <main class="container" id="main-content">
-        <div class="empty-state" id="emptyState">
-            <i class="fa-solid fa-folder-open fa-3x mb-3"></i>
-            <h3>No services found</h3>
-            <p>Try adjusting your search criteria.</p>
-        </div>
         <!-- Sections injected by JS -->
     </main>
 
@@ -440,7 +396,8 @@
     <footer>
         <div class="container">
             <p class="mb-3"><i class="fa-solid fa-location-dot me-2"></i>N & N Law Chambers ; TamilNadu, Andhra Pradesh, Karnataka, Telangana.</p>
-            <p class="mb-0">&copy; 2026 N & N Law Chambers. All rights reserved.</p>
+            <p class="mb-1">&copy; 2026 N & N Law Chambers. All rights reserved.</p>
+            <p class="mb-0 small">Developed by <a href="https://aryasrikanth73.github.io/srikantharya/resume.html" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">Srikanth Arya</a></p>
         </div>
     </footer>
 
@@ -453,28 +410,45 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4 text-center">
-                    <p class="text-muted mb-4">Leave your details for a 30-minute callback regarding <br><strong id="modalServiceName" class="text-dark fs-5 mt-2 d-inline-block"></strong></p>
                     
                     <form id="consultationForm">
+                        
+                        <!-- Hidden Fields to capture context for WhatsApp -->
+                        <input type="hidden" id="selectedMenu" value="">
+                        <input type="hidden" id="selectedCategory" value="">
                         <input type="hidden" id="selectedService" value="">
                         
+                        <!-- 1. Full Name -->
                         <div class="mb-3 text-start">
-                            <input type="text" class="form-control form-control-lg" id="userName" placeholder="Full Name" required>
+                            <label for="userName" class="form-label fw-bold text-secondary mb-1" style="font-size: 0.85rem;">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="userName" placeholder="Enter your full name" required>
                         </div>
 
-                        <div class="input-group mb-3 text-start">
-                            <span class="input-group-text" id="basic-addon1">+91</span>
-                            <input type="tel" class="form-control form-control-lg" id="userPhone" placeholder="Mobile Number (Optional)" pattern="[0-9]{10}" maxlength="10" title="Please enter a valid 10-digit mobile number">
+                        <!-- 2. Email -->
+                        <div class="mb-3 text-start">
+                            <label for="userEmail" class="form-label fw-bold text-secondary mb-1" style="font-size: 0.85rem;">Email Address</label>
+                            <input type="email" class="form-control" id="userEmail" placeholder="Enter your email (Optional)">
                         </div>
 
+                        <!-- 3. Mobile Number -->
+                        <div class="mb-3 text-start">
+                            <label for="userPhone" class="form-label fw-bold text-secondary mb-1" style="font-size: 0.85rem;">Mobile Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">+91</span>
+                                <input type="tel" class="form-control" id="userPhone" placeholder="10-digit mobile number (Optional)" pattern="[0-9]{10}" maxlength="10" title="Please enter a valid 10-digit mobile number">
+                            </div>
+                        </div>
+
+                        <!-- 4. Message -->
                         <div class="mb-4 text-start">
-                            <input type="email" class="form-control form-control-lg" id="userEmail" placeholder="Email Address (Optional)">
+                            <label for="userMessage" class="form-label fw-bold text-secondary mb-1" style="font-size: 0.85rem;">Message</label>
+                            <textarea class="form-control" id="userMessage" rows="2" placeholder="Any specific requirements or questions? (Optional)"></textarea>
                         </div>
                         
-                        <button type="submit" class="btn btn-accent w-100 py-3 mb-3 fw-bold fs-5">Get Free Consultation</button>
+                        <button type="submit" class="btn btn-accent w-100 py-2 mb-2 fw-bold fs-6">Get Free Consultation</button>
                         
-                        <p class="small text-muted mb-0 fw-medium">
-                            <i class="fa-solid fa-shield-halved text-success me-1"></i> 100% Secure & Confidential Form
+                        <p class="small text-muted mb-0 fw-medium mt-2">
+                            <i class="fa-solid fa-shield-halved text-success me-1"></i> 100% Secure & Confidential
                         </p>
                     </form>
                 </div>
@@ -737,10 +711,13 @@
 
                     sub.items.forEach(item => {
                         // Desktop 4 (col-lg-3), Tablet 2 (col-md-6), Mobile 1 (col-12)
-                        // Trigger modal on click instead of standard anchor default
+                        // Trigger modal on click and pass hierarchical data via dataset
                         sectionHTML += `
                             <div class="col-12 col-md-6 col-lg-3 service-card-wrapper" data-title="${item.name.toLowerCase()}">
-                                <a href="#" class="service-card" data-bs-toggle="modal" data-bs-target="#consultationModal" data-service-name="${item.name}">
+                                <a href="#" class="service-card" data-bs-toggle="modal" data-bs-target="#consultationModal" 
+                                   data-menu-name="${category.navTitle}"
+                                   data-category-name="${sub.title}"
+                                   data-service-name="${item.name}">
                                     <div class="icon-wrapper">
                                         <i class="fa-solid ${item.icon}"></i>
                                     </div>
@@ -780,39 +757,6 @@
                     }
                 });
             });
-
-            // Live Search Filtering
-            const searchInput = document.getElementById('searchInput');
-            const emptyState = document.getElementById('emptyState');
-            
-            searchInput.addEventListener('input', (e) => {
-                const term = e.target.value.toLowerCase();
-                let hasAnyVisible = false;
-
-                const sections = document.querySelectorAll('.service-section');
-                
-                sections.forEach(section => {
-                    let sectionHasVisibleCard = false;
-                    const cards = section.querySelectorAll('.service-card-wrapper');
-                    
-                    cards.forEach(card => {
-                        const title = card.getAttribute('data-title');
-                        if(title.includes(term)) {
-                            card.style.display = 'block';
-                            sectionHasVisibleCard = true;
-                            hasAnyVisible = true;
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-
-                    // Hide the entire section (including heading) if no cards match
-                    section.style.display = sectionHasVisibleCard ? 'block' : 'none';
-                });
-
-                // Toggle Empty State Message
-                emptyState.style.display = hasAnyVisible ? 'none' : 'block';
-            });
             
             // --- 4. MODAL & WHATSAPP INTEGRATION ---
             const consultationModal = document.getElementById('consultationModal');
@@ -820,12 +764,18 @@
                 // Populate modal content when opened
                 consultationModal.addEventListener('show.bs.modal', event => {
                     const button = event.relatedTarget;
-                    const serviceName = button.getAttribute('data-service-name');
                     
-                    const modalServiceName = consultationModal.querySelector('#modalServiceName');
+                    // Extract data attributes
+                    const serviceName = button.getAttribute('data-service-name') || 'General Consultation';
+                    const categoryName = button.getAttribute('data-category-name') || '';
+                    const menuName = button.getAttribute('data-menu-name') || '';
+                    
+                    const selectedMenuInput = consultationModal.querySelector('#selectedMenu');
+                    const selectedCategoryInput = consultationModal.querySelector('#selectedCategory');
                     const selectedServiceInput = consultationModal.querySelector('#selectedService');
                     
-                    modalServiceName.textContent = serviceName;
+                    selectedMenuInput.value = menuName;
+                    selectedCategoryInput.value = categoryName;
                     selectedServiceInput.value = serviceName;
                 });
             }
@@ -837,18 +787,36 @@
                     e.preventDefault();
                     
                     const name = document.getElementById('userName').value.trim();
-                    const phone = document.getElementById('userPhone').value.trim();
                     const email = document.getElementById('userEmail').value.trim();
+                    const phone = document.getElementById('userPhone').value.trim();
+                    
+                    const menu = document.getElementById('selectedMenu').value;
+                    const category = document.getElementById('selectedCategory').value;
                     const service = document.getElementById('selectedService').value;
+                    const userMessage = document.getElementById('userMessage').value.trim();
+                    
                     const targetPhone = "916281682534"; // Number provided with country code
                     
                     // Create structured message based on provided details
-                    let message = `Hello! I would like a Free Expert Consultation for *${service}*.\n\n*My Details:*\nName: ${name}`;
-                    if (phone) {
-                        message += `\nPhone: +91-${phone}`;
-                    }
+                    let message = `*Free Expert Consultation Request*\n\n`;
+                    
+                    message += `*Service Details:*\n`;
+                    if (menu) message += `• Main Menu: ${menu}\n`;
+                    if (category) message += `• Category: ${category}\n`;
+                    message += `• Service: ${service}\n\n`;
+                    
+                    message += `*Customer Details:*\n`;
+                    message += `• Name: ${name}\n`;
+                    
                     if (email) {
-                        message += `\nEmail: ${email}`;
+                        message += `• Email: ${email}\n`;
+                    }
+                    if (phone) {
+                        message += `• Phone: +91-${phone}\n`;
+                    }
+
+                    if (userMessage) {
+                        message += `\n*Message:*\n${userMessage}\n`;
                     }
 
                     const encodedMessage = encodeURIComponent(message);
